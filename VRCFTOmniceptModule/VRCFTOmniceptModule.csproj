@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <TargetFrameworks>net7.0;netstandard2.1</TargetFrameworks>
+        <LangVersion>11</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -34,7 +35,7 @@
         <HintPath>..\..\..\HP\HP Omnicept SDK\1.13.1\bin\Release\csharp\NetMQ.dll</HintPath>
       </Reference>
       <Reference Include="VRCFaceTracking.Core">
-        <HintPath>VRCFaceTracking.Core.dll</HintPath>
+        <HintPath>..\..\VRCFaceTracking\unity_release\VRCFaceTracking.Core.dll</HintPath>
       </Reference>
     </ItemGroup>
 
