@@ -3,8 +3,10 @@
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFrameworks>net7.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net7.0;netstandard2.1;net481</TargetFrameworks>
         <LangVersion>11</LangVersion>
+        <AssemblyVersion>1.6.0.0</AssemblyVersion>
+        <FileVersion>1.6.0.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -13,33 +15,11 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <PlatformTarget>x64</PlatformTarget>
+      <DebugType>none</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="AsyncIO">
-        <HintPath>..\..\..\HP\HP Omnicept SDK\1.13.1\bin\Release\csharp\AsyncIO.dll</HintPath>
-      </Reference>
-      <Reference Include="Google.Protobuf">
-        <HintPath>..\..\..\HP\HP Omnicept SDK\1.13.1\bin\Release\csharp\Google.Protobuf.dll</HintPath>
-      </Reference>
-      <Reference Include="lib-client-csharp">
-        <HintPath>..\..\..\HP\HP Omnicept SDK\1.13.1\bin\Release\csharp\lib-client-csharp.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.Extensions.Logging">
-        <HintPath>Microsoft.Extensions.Logging.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.Extensions.Logging.Abstractions">
-        <HintPath>Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-      </Reference>
-      <Reference Include="NetMQ">
-        <HintPath>..\..\..\HP\HP Omnicept SDK\1.13.1\bin\Release\csharp\NetMQ.dll</HintPath>
-      </Reference>
-      <Reference Include="VRCFaceTracking.Core">
-        <HintPath>..\..\VRCFaceTracking\unity_release\VRCFaceTracking.Core.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
       <PackageReference Include="SemanticVersioning" Version="2.0.2" />
     </ItemGroup>
 
@@ -47,6 +27,52 @@
       <None Remove="VRCFaceTracking.Core.dll" />
       <None Remove="Microsoft.Extensions.Logging.Abstractions.dll" />
       <None Remove="Microsoft.Extensions.Logging.dll" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="AsyncIO">
+        <HintPath>$(HPSDK)\HP Omnicept SDK\$(HPSDKVERSION)\bin\Release\csharp\AsyncIO.dll</HintPath>
+      </Reference>
+      <Reference Include="Google.Protobuf">
+        <HintPath>$(HPSDK)\HP Omnicept SDK\$(HPSDKVERSION)\bin\Release\csharp\Google.Protobuf.dll</HintPath>
+      </Reference>
+      <Reference Include="lib-client-csharp">
+        <HintPath>$(HPSDK)\HP Omnicept SDK\$(HPSDKVERSION)\bin\Release\csharp\lib-client-csharp.dll</HintPath>
+      </Reference>
+      <Reference Include="NetMQ">
+        <HintPath>$(HPSDK)\HP Omnicept SDK\$(HPSDKVERSION)\bin\Release\csharp\NetMQ.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
+        <Reference Include="VRCFaceTracking.Core">
+            <HintPath>$(VRCFaceTrackingBuild)\net481\VRCFaceTracking.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="VRCFaceTracking.SDK">
+            <HintPath>$(VRCFaceTrackingBuild)\net481\VRCFaceTracking.SDK.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+        <Reference Include="VRCFaceTracking.Core">
+            <HintPath>$(VRCFaceTrackingBuild)\netstandard2.1\VRCFaceTracking.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="VRCFaceTracking.SDK">
+            <HintPath>$(VRCFaceTrackingBuild)\netstandard2.1\VRCFaceTracking.SDK.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+        <Reference Include="VRCFaceTracking.Core">
+            <HintPath>$(VRCFaceTrackingBuild)\net7.0\VRCFaceTracking.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="VRCFaceTracking.SDK">
+            <HintPath>$(VRCFaceTrackingBuild)\net7.0\VRCFaceTracking.SDK.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="VRCFTOmniceptModule.csproj.user" />
     </ItemGroup>
 
 </Project>
